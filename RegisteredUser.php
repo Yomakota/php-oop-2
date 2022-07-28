@@ -6,6 +6,7 @@ class RegisteredUser extends User
 {
     public $nameUser;
     public $emailUser;
+    public $amount = 20;
     public $discount = 20;
 
     public function __construct($_nameUser, $_emailUser)

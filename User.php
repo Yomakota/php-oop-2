@@ -5,6 +5,7 @@ class User
 {
     public $discount = 0;
     protected $productsChosen = [];
+    public $amount = 1000;
 
     public function addToBasket($item)
     {
@@ -25,5 +26,15 @@ class User
 
         $totalSum -= $totalSum * $this->discount / 100;
         return $totalSum;
+    }
+    public function getPayment()
+    {
+        $totalPrice = $this->totalPrice();
+
+        if ($this->amount < $totalPrice) {
+            die('No enough money');
+        } else {
+            return 'ok';
+        }
     }
 }
