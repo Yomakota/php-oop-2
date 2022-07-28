@@ -5,7 +5,7 @@ class PetShopProducts
     protected $animal;
     protected $type;
     protected $brand;
-    protected $price;
+    public $price;
 
 
     public function __construct($_animal, $_type, $_brand, $_price)
