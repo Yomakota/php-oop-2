@@ -1,11 +1,9 @@
 <?php
 // L'utente potrà sia comprare i prodotti senza registrarsi, oppure iscriversi e ricevere il 20% di sconto su tutti i prodotti.
-
 class User
 {
     public $discount = 0;
     protected $productsChosen = [];
-    public $amount = 1000;
 
     public function addToBasket($item)
     {
@@ -27,12 +25,12 @@ class User
         $totalSum -= $totalSum * $this->discount / 100;
         return $totalSum;
     }
-    public function getPayment()
+    public function getPayment($card)
     {
         $totalPrice = $this->totalPrice();
 
-        if ($this->amount < $totalPrice) {
-            die('No enough money');
+        if ($card->amount < $totalPrice) {
+            die('no ok');
         } else {
             return 'ok';
         }

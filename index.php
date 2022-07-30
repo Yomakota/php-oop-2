@@ -16,17 +16,17 @@ require_once __DIR__ . '/PetGames.php';
 require_once __DIR__ . '/User.php';
 require_once __DIR__ . '/RegisteredUser.php';
 
-// require_once __DIR__ . '/Card.php';
+require_once __DIR__ . '/Card.php';
 
 //PRODUCTS
-$dog_food = new PetFood('dog', 'biscuits', 'happy dog', 50);
-var_dump($dog_food);
-$dog_shampoo = new PetShampoo('dog', 'shampoo', 'clean dog', 20);
-var_dump($dog_shampoo);
-$dog_house = new PetHouses('dog', 'dog-house', 'Renzo Piano Pets House', 200);
-var_dump($dog_house);
-$dog_game = new PetGames('dog', 'dog-game', 'have fan dog', 35);
-var_dump($dog_game);
+$dog_food = new PetFood('Dog', 'Biscuits', 'Happy Dog®', 50);
+//var_dump($dog_food);
+$dog_shampoo = new PetShampoo('Dog', 'Shampoo', 'Clean Dog®', 20);
+//var_dump($dog_shampoo);
+$dog_house = new PetHouses('Dog', 'Dog-house', 'Renzo Piano Pets House®', 200);
+//var_dump($dog_house);
+$dog_game = new PetGames('Dog', 'Dog-game', 'Have fan Dog®', 35);
+//var_dump($dog_game);
 
 
 //USER
@@ -34,19 +34,46 @@ $user = new User;
 $user->addToBasket($dog_food);
 $user->addToBasket($dog_shampoo);
 $user->totalPrice();
-$user->getPayment();
-var_dump($user);
-var_dump($user->getPayment());
+//var_dump($user);
 
 //REGISTER-USER
 $loggedUser = new RegisteredUser('rossi', 'rossi@mail.com');
 $loggedUser->addToBasket($dog_food);
 $loggedUser->addToBasket($dog_shampoo);
 $loggedUser->totalPrice();
-$loggedUser->getPayment();
-var_dump($loggedUser);
-var_dump($loggedUser->getPayment());
+// var_dump($loggedUser);
 
 //CARD
-// $card = new Card('rossi', 'rossi@mail', '03/23', '123', 1000);
-// var_dump($card);
+$card = new Card('rossi', '12335677', '03/23', '123');
+$card->amount = 1000;
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Pets Shop</title>
+    </head>
+
+    <body>
+        <?php if ($user->getPayment($card) === 'ok') { ?>
+        <h2> Thanks for shopping </h2>
+        <?php foreach ($loggedUser->getProductsChosen() as $item) { ?>
+        <div>
+            <?php echo $item->productsDetails(); ?>
+        </div>
+        <?php } ?>
+        <h3>
+            Totale:
+            <?php echo $loggedUser->totalPrice(); ?>
+            euro
+        </h3>
+        <?php } else { ?>
+        <h2>No Enough Credits for this transition</h2>
+        <?php } ?>
+    </body>
+
+</html>
