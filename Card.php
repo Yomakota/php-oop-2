@@ -5,7 +5,7 @@ class Card
     protected $number;
     protected $expireDate;
     protected $cvv;
-    public $amount = 0;
+    public $credit = 0;
 
     public function __construct($_name, $_number, $_expireDate, $_cvv)
     {

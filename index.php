@@ -24,8 +24,8 @@ $dog_food = new PetFood('Dog', 'Biscuits', 'Happy Dog®', 50);
 $dog_shampoo = new PetShampoo('Dog', 'Shampoo', 'Clean Dog®', 20);
 //var_dump($dog_shampoo);
 $dog_house = new PetHouses('Dog', 'Dog-house', 'Renzo Piano Pets House®', 200);
-$dog_house->getWarrantyCode();
-var_dump($dog_house);
+// $dog_house->getWarrantyCode();
+// var_dump($dog_house);
 $dog_game = new PetGames('Dog', 'Dog-game', 'Have fan Dog®', 35);
 //var_dump($dog_game);
 
@@ -36,18 +36,19 @@ $user->addToBasket($dog_food);
 $user->addToBasket($dog_shampoo);
 $user->addToBasket($dog_house);
 $user->totalPrice();
-var_dump($user);
+// var_dump($user);
 
 //REGISTER-USER
 $loggedUser = new RegisteredUser('rossi', 'rossi@mail.com');
 $loggedUser->addToBasket($dog_food);
 $loggedUser->addToBasket($dog_shampoo);
+$loggedUser->addToBasket($dog_house);
 $loggedUser->totalPrice();
 // var_dump($loggedUser);
 
 //CARD
 $card = new Card('rossi', '12335677', '03/23', '123');
-$card->amount = 1000;
+$card->credit = 0;
 ?>
 
 <!DOCTYPE html>
@@ -61,20 +62,25 @@ $card->amount = 1000;
     </head>
 
     <body>
-        <?php if ($user->getPayment($card) === 'ok') { ?>
+        <h1>My Pets Shop</h1>
+        <?php try { ?>
+        <?php if ($loggedUser->getPayment($card) === 'enough credit') { ?>
         <h2> Thanks for shopping </h2>
-        <?php foreach ($loggedUser->getProductsChosen() as $item) { ?>
         <div>
-            <?php echo $item->productsDetails(); ?>
+            <ol>
+                <?php foreach ($loggedUser->getProductsChosen() as $item) { ?>
+                <li>
+                    <?php echo $item->productsDetails(); ?>
+                </li>
+                <?php } ?>
+            </ol>
         </div>
+        <h3> Totale: <?php echo $loggedUser->totalPrice() ?> euro</h3>
         <?php } ?>
-        <h3>
-            Totale:
-            <?php echo $loggedUser->totalPrice(); ?>
-            euro
-        </h3>
-        <?php } else { ?>
-        <h2>No Enough Credits for this transition</h2>
+        <?php } catch (Exception $err) { ?>
+        <!-- <?php var_dump($err->getMessage()); ?> -->
+        <?php error_log($err->getMessage()); ?>
+        <h2>Something went wrong, check and TRY AGAIN, please :)</h2>
         <?php } ?>
     </body>
 
