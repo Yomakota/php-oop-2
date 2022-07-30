@@ -8,15 +8,15 @@
 // BONUS:
 // Il pagamento avviene con la carta prepagata che deve contenere un saldo sufficiente all'acquisto.
 
-require_once __DIR__ . '/Class/PetFood.php';
-require_once __DIR__ . '/Class/PetShampoo.php';
-require_once __DIR__ . '/Class/PetHouses.php';
-require_once __DIR__ . '/Class/PetGames.php';
+require_once __DIR__ . '/Classes/PetFood.php';
+require_once __DIR__ . '/Classes/PetShampoo.php';
+require_once __DIR__ . '/Classes/PetHouses.php';
+require_once __DIR__ . '/Classes/PetGames.php';
 
-require_once __DIR__ . '/Class/User.php';
-require_once __DIR__ . '/Class/RegisteredUser.php';
+require_once __DIR__ . '/Classes/User.php';
+require_once __DIR__ . '/Classes/RegisteredUser.php';
 
-require_once __DIR__ . '/Class/Card.php';
+require_once __DIR__ . '/Classes/Card.php';
 
 //PRODUCTS
 $dog_food = new PetFood('Dog', 'Biscuits', 'Happy Dog®', 50);
