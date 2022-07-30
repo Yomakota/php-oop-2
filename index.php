@@ -24,7 +24,8 @@ $dog_food = new PetFood('Dog', 'Biscuits', 'Happy Dog®', 50);
 $dog_shampoo = new PetShampoo('Dog', 'Shampoo', 'Clean Dog®', 20);
 //var_dump($dog_shampoo);
 $dog_house = new PetHouses('Dog', 'Dog-house', 'Renzo Piano Pets House®', 200);
-//var_dump($dog_house);
+$dog_house->getWarrantyCode();
+var_dump($dog_house);
 $dog_game = new PetGames('Dog', 'Dog-game', 'Have fan Dog®', 35);
 //var_dump($dog_game);
 
@@ -33,8 +34,9 @@ $dog_game = new PetGames('Dog', 'Dog-game', 'Have fan Dog®', 35);
 $user = new User;
 $user->addToBasket($dog_food);
 $user->addToBasket($dog_shampoo);
+$user->addToBasket($dog_house);
 $user->totalPrice();
-//var_dump($user);
+var_dump($user);
 
 //REGISTER-USER
 $loggedUser = new RegisteredUser('rossi', 'rossi@mail.com');
